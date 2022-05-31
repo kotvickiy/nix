@@ -9,6 +9,8 @@ if [ -z "$SUDO_USER" ]; then
     echo "Этот скрипт разрешается запускать только из sudo!";
     exit -1;
 fi
+cd ~
+
 
 apt update -y && apt upgrade -y
 apt autoremove -y
@@ -28,4 +30,6 @@ echo "[sambashare]
 service smbd restart
 ufw allow samba
 (echo "$pass"; echo "$pass") | smbpasswd -s -a "$newuser"
+
+rm -r nix/
 
