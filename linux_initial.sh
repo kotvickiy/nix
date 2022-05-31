@@ -9,7 +9,6 @@ if [ -z "$SUDO_USER" ]; then
     echo "Этот скрипт разрешается запускать только из sudo!";
     exit -1;
 fi
-cd ~
 
 
 apt update -y && apt upgrade -y
@@ -31,5 +30,5 @@ service smbd restart
 ufw allow samba
 (echo "$pass"; echo "$pass") | smbpasswd -s -a "$newuser"
 
-rm -r nix/
-
+cd
+rm -r ~/nix/
