@@ -22,12 +22,24 @@ dpkg-reconfigure --frontend noninteractive locales
 update-locale LANG=ru_RU.UTF-8
 
 apt install samba -y
-mkdir /mnt/share/
-echo "[sambashare]
-    comment = Samba on Ubuntu Server
-    path = /mnt/share
-    read only = no
-    browsable = yes" >> /etc/samba/smb.conf
+mkdir /mnt/sda/photo
+echo " workgroup = WORKGROUP
+    netbios name = ubuntu
+    security = user
+    map to guest = bad user
+
+interfaces = 127.0.0.0/8 eth0
+
+server role = standalone server
+obey pam restrictions = yes
+
+[photo]
+  path = /mnt/sda/photo
+  valid users = @smbgroup
+#  valid users = tasha
+  guest ok = no
+  writable = yes
+  browsable = yes" >> /etc/samba/smb.conf
 service smbd restart
 ufw allow samba
 (echo "$pass"; echo "$pass") | smbpasswd -s -a "$newuser"
