@@ -10,8 +10,10 @@ if [ -z "$SUDO_USER" ]; then
     exit -1;
 fi
 
+DEBIAN_FRONTEND=noninteractive
+export DEBIAN_FRONTEND
 
-apt update -y && apt upgrade -y
+apt update -yq && apt upgrade -yq
 apt autoremove -y
 
 apt install language-pack-ru -y
