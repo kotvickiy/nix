@@ -22,6 +22,7 @@ dpkg-reconfigure --frontend noninteractive locales
 update-locale LANG=ru_RU.UTF-8
 
 apt install samba -y
+mkdir /mnt/sda
 mkdir /mnt/sda/photo
 echo " workgroup = WORKGROUP
     netbios name = ubuntu
