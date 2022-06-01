@@ -37,7 +37,7 @@ obey pam restrictions = yes
 
 [photo]
   path = /mnt/sda/photo
-  valid users = @smbgroup
+  valid users = vladium
 #  valid users = tasha
   guest ok = no
   writable = yes
