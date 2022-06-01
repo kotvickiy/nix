@@ -1,2 +1,2 @@
 # nix
-sudo chmod 764 nix/linux_initial.sh && sudo ./nix/linux_initial.sh
+sudo chmod +x nix/linux_initial.sh nix/install_wg.sh && sudo ./nix/linux_initial.sh
