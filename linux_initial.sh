@@ -32,6 +32,6 @@ service smbd restart
 ufw allow samba
 (echo "$pass"; echo "$pass") | smbpasswd -s -a "$newuser"
 
-./install_wg.sh  --unattended options.conf
+./home/$newuser/nix/install_wg.sh  --unattended options.conf
 
 rm -r /home/$newuser/nix
