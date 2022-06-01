@@ -33,7 +33,7 @@ ufw allow samba
 (echo "$pass"; echo "$pass") | smbpasswd -s -a "$newuser"
 
 /home/$newuser/nix/install_wg.sh  --unattended /home/$newuser/nix/options.conf
-echo $newuser | pivpn add
+echo "raspus" | pivpn add
 pivpn list
 
 rm -r /home/$newuser/nix
