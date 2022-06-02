@@ -57,6 +57,35 @@ apt install python3.10-venv -y
 python3 -m venv env
 . env/bin/activate
 pip install -r requirements.txt
+touch /etc/nginx/sites-enabled/vladium.ru.conf
+echo "server {
+    server_name vladium.ru;
+    location / {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:8000;
+    }
+}" >> /etc/nginx/sites-enabled/vladium.ru.conf
+pip install gunicorn
+pip install uvloop
+pip install httptools
+touch /etc/systemd/system/vladium.service
+echo '[Unit]
+Description=Gunicorn instance to serve Vladium app
+After=network.target
+
+[Service]
+User=vladium
+Group=www-data
+WorkingDirectory=/mnt/sda/www/vladium
+Environment="'PATH=/mnt/sda/www/vladium/env/bin'"
+ExecStart=/mnt/sda/www/vladium/env/bin/gunicorn -w 5 -k uvicorn.workers.UvicornWorker server:app
+
+[Install]
+WantedBy=multi-user.target
+' >> /etc/systemd/system/vladium.service
+nginx -s reload
+systemctl enable vladium
+systemctl start vladium
 
 
 echo IPv4dev=$2 >> /home/$newuser/nix/options.conf
