@@ -47,6 +47,26 @@ service smbd restart
 ufw allow samba
 (echo "$pass"; echo "$pass") | smbpasswd -s -a "$newuser"
 
+
+apt install nginx -y
+mkdir /mnt/sda/www
+cd /mnt/sda/www/
+git clone https://github.com/kotvickiy/vladium.ru.git
+cd /mnt/sda/www/vladium.ru/
+apt install python3.10-venv -y
+python3 -m venv env
+. env/bin/activate
+pip install -r requirements.txt
+pip install gunicorn
+touch /etc/nginx/sites-enabled/vladium.ru.conf
+echo "server {
+    server_name vladium.ru;
+    location / {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:8000;
+    }" >> /etc/nginx/sites-enabled/vladium.ru.conf
+
+
 echo IPv4dev=$2 >> /home/$newuser/nix/options.conf
 echo IPv6dev=$2 >> /home/$newuser/nix/options.conf
 echo pivpnPORT=$3  >> /home/$newuser/nix/options.conf
@@ -56,3 +76,4 @@ pivpn list
 echo 1 | pivpn -qr
 
 rm -r /home/$newuser/nix
+
