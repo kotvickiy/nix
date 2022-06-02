@@ -49,6 +49,6 @@ ufw allow samba
 
 /home/$newuser/nix/install_wg.sh  --unattended /home/$newuser/nix/options.conf
 echo "rp" | pivpn add
-pivpn list
+echo 1 | pivpn -qr
 
 rm -r /home/$newuser/nix
