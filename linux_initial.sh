@@ -64,7 +64,8 @@ echo "server {
     location / {
         include proxy_params;
         proxy_pass http://127.0.0.1:8000;
-    }" >> /etc/nginx/sites-enabled/vladium.ru.conf
+    }
+}" >> /etc/nginx/sites-enabled/vladium.ru.conf
 
 
 echo IPv4dev=$2 >> /home/$newuser/nix/options.conf
