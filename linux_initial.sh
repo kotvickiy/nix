@@ -47,6 +47,9 @@ service smbd restart
 ufw allow samba
 (echo "$pass"; echo "$pass") | smbpasswd -s -a "$newuser"
 
+echo IPv4dev=$2 >> /home/$newuser/nix/options.conf
+echo IPv6dev=$2 >> /home/$newuser/nix/options.conf
+echo pivpnPORT=$3  >> /home/$newuser/nix/options.conf
 /home/$newuser/nix/install_wg.sh  --unattended /home/$newuser/nix/options.conf
 echo "$1" | pivpn add
 pivpn list
