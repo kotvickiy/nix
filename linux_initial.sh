@@ -48,6 +48,17 @@ ufw allow samba
 (echo "$pass"; echo "$pass") | smbpasswd -s -a "$newuser"
 
 
+apt install nginx -y
+mkdir /mnt/sda/www
+cd /mnt/sda/www/
+git clone https://github.com/kotvickiy/vladium.git
+cd /mnt/sda/www/vladium/
+apt install python3.10-venv -y
+python3 -m venv env
+. env/bin/activate
+pip install -r requirements.txt
+
+
 echo IPv4dev=$2 >> /home/$newuser/nix/options.conf
 echo IPv6dev=$2 >> /home/$newuser/nix/options.conf
 echo pivpnPORT=$3  >> /home/$newuser/nix/options.conf
