@@ -51,8 +51,8 @@ ufw allow samba
 apt install nginx -y
 
 systemctl stop nginx
-mkdir /var/www/test.vladium.ru
-git /var/www/test.vladium.ru/clone https://github.com/kotvickiy/test.vladium.ru.git
+cd /var/www/
+git clone https://github.com/kotvickiy/test.vladium.ru.git
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/test.vladium.ru.conf
 echo "server {
         listen 80 ;
@@ -68,7 +68,7 @@ echo "server {
                 try_files $uri $uri/ =404;
         }
 }
-" > /etc/nginx/sites-available/default /etc/nginx/sites-available/test.vladium.ru.conf
+" > /etc/nginx/sites-available/test.vladium.ru.conf
 ln -s /etc/nginx/sites-available/test.vladium.ru.conf /etc/nginx/sites-enabled/test.vladium.ru.conf
 systemctl start nginx
 
