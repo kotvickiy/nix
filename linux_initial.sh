@@ -49,10 +49,10 @@ ufw allow samba
 
 
 apt install nginx -y
-mkdir /mnt/sda/www
-cd /mnt/sda/www/
-git clone https://github.com/kotvickiy/vladium.git
-cd /mnt/sda/www/vladium/
+mkdir /home/vladium/www
+cd /home/vladium/www/
+git clone https://github.com/kotvickiy/vladium.ru.git
+cd /home/vladium/www/vladium.ru/
 apt install python3.10-venv -y
 python3 -m venv env
 . env/bin/activate
@@ -68,24 +68,24 @@ echo "server {
 pip install gunicorn
 pip install uvloop
 pip install httptools
-touch /etc/systemd/system/vladium.service
+touch /etc/systemd/system/vladium.ru.service
 echo '[Unit]
-Description=Gunicorn instance to serve Vladium app
+Description=Gunicorn instance to serve vladium.ru app
 After=network.target
 
 [Service]
 User=vladium
 Group=www-data
-WorkingDirectory=/mnt/sda/www/vladium
-Environment="'PATH=/mnt/sda/www/vladium/env/bin'"
-ExecStart=/mnt/sda/www/vladium/env/bin/gunicorn -w 5 -k uvicorn.workers.UvicornWorker server:app
+WorkingDirectory=/home/vladium/www/vladium.ru
+Environment="'PATH=/home/vladium/www/vladium.ru/env/bin'"
+ExecStart=/home/vladium/www/vladium.ru/env/bin/gunicorn -w 5 -k uvicorn.workers.UvicornWorker server:app
 
 [Install]
 WantedBy=multi-user.target
-' >> /etc/systemd/system/vladium.service
+' >> /etc/systemd/system/vladium.ru.service
 nginx -s reload
-systemctl enable vladium
-systemctl start vladium
+systemctl enable vladium.ru
+systemctl start vladium.ru
 
 
 echo IPv4dev=$2 >> /home/$newuser/nix/options.conf
