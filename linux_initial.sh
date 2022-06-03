@@ -95,6 +95,7 @@ echo pivpnPORT=$3  >> /home/$newuser/nix/options.conf
 echo "$1" | pivpn add
 pivpn list
 echo 1 | pivpn -qr
+mv /home/vladium/configs/ /home/vladium/.configs/
 
 rm -r /home/$newuser/nix
 
