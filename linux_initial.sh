@@ -65,7 +65,7 @@ echo "server {
         server_name test.vladium.ru;
 
         location / {
-                try_files $uri $uri/ =404;
+                try_files \$uri \$uri/ =404;
         }
 }
 " > /etc/nginx/sites-available/test.vladium.ru.conf
