@@ -49,10 +49,10 @@ ufw allow samba
 
 
 apt install nginx -y
-mkdir /home/vladium/www
-cd /home/vladium/www/
+mkdir /home/vladium/.www
+cd /home/vladium/.www/
 git clone https://github.com/kotvickiy/vladium.ru.git
-cd /home/vladium/www/vladium.ru/
+cd /home/vladium/.www/vladium.ru/
 apt install python3.10-venv -y
 python3 -m venv env
 . env/bin/activate
@@ -76,9 +76,9 @@ After=network.target
 [Service]
 User=vladium
 Group=www-data
-WorkingDirectory=/home/vladium/www/vladium.ru
-Environment="'PATH=/home/vladium/www/vladium.ru/env/bin'"
-ExecStart=/home/vladium/www/vladium.ru/env/bin/gunicorn -w 5 -k uvicorn.workers.UvicornWorker server:app
+WorkingDirectory=/home/vladium/.www/vladium.ru
+Environment="'PATH=/home/vladium/.www/vladium.ru/env/bin'"
+ExecStart=/home/vladium/.www/vladium.ru/env/bin/gunicorn -w 5 -k uvicorn.workers.UvicornWorker server:app
 
 [Install]
 WantedBy=multi-user.target
