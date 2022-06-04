@@ -108,6 +108,13 @@ systemctl enable vladium.ru
 systemctl start vladium.ru
 
 
+sudo snap install core; sudo snap refresh core
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+certbot --nginx --non-interactive --agree-tos -m webmaster@example.com
+sudo certbot renew --dry-run
+
+
 echo IPv4dev=$2 >> /home/$newuser/nix/options.conf
 echo IPv6dev=$2 >> /home/$newuser/nix/options.conf
 echo pivpnPORT=$3  >> /home/$newuser/nix/options.conf
