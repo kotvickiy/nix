@@ -27,7 +27,7 @@ update-locale LANG=ru_RU.UTF-8
 
 apt install samba -y
 mkdir /mnt/sda
-mount -t ext4 /dev/sda1 /mnt/sda/
+mount -t $4 /dev/sda1 /mnt/sda/
 uuid=`blkid | grep sda | cut -d '"' -f 4`
 echo UUID=$uuid /mnt/sda $4 defaults 0 0 >> /etc/fstab
 
