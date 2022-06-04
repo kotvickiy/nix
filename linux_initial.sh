@@ -28,7 +28,7 @@ update-locale LANG=ru_RU.UTF-8
 apt install samba -y
 mkdir /mnt/sda
 uuid=`blkid | grep sda | cut -d '"' -f 4`
-echo UUID=$uuid  /mnt/sda vfat defaults 0 0 >> /etc/fstab
+echo UUID=$uuid /mnt/sda $4 defaults 0 0 >> /etc/fstab
 
 echo " workgroup = WORKGROUP
     netbios name = ubuntu
