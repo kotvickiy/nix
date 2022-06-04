@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 pass=241215
 newuser="vladium"
 
@@ -13,13 +14,16 @@ fi
 DEBIAN_FRONTEND=noninteractive
 export DEBIAN_FRONTEND
 
+
 apt update -yq && apt upgrade -yq
 apt autoremove -y
+
 
 apt install language-pack-ru -y
 echo "ru_RU.UTF-8 UTF-8" | tee -a /etc/locale.gen
 dpkg-reconfigure --frontend noninteractive locales
 update-locale LANG=ru_RU.UTF-8
+
 
 apt install samba -y
 mkdir /mnt/sda
@@ -68,8 +72,6 @@ echo "server {
 }
 " > /etc/nginx/sites-available/test.vladium.ru.conf
 ln -s /etc/nginx/sites-available/test.vladium.ru.conf /etc/nginx/sites-enabled/test.vladium.ru.conf
-systemctl start nginx
-
 
 git clone https://github.com/kotvickiy/vladium.ru.git
 cd /var/www/vladium.ru/
@@ -124,5 +126,5 @@ pivpn list
 echo 1 | pivpn -qr
 mv /home/vladium/configs/ /home/vladium/.configs/
 
-rm -r /home/$newuser/nix
 
+rm -r /home/$newuser/nix
