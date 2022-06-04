@@ -49,8 +49,6 @@ ufw allow samba
 
 
 apt install nginx -y
-
-systemctl stop nginx
 cd /var/www/
 git clone https://github.com/kotvickiy/test.vladium.ru.git
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/test.vladium.ru.conf
@@ -91,7 +89,7 @@ pip install gunicorn
 pip install uvloop
 pip install httptools
 touch /etc/systemd/system/vladium.ru.service
-echo '[Unit]
+echo "[Unit]
 Description=Gunicorn instance to serve vladium.ru app
 After=network.target
 
@@ -99,12 +97,12 @@ After=network.target
 User=vladium
 Group=www-data
 WorkingDirectory=/var/www/vladium.ru
-Environment="'PATH=/var/www/vladium.ru/env/bin'"
+Environment=\"PATH=/var/www/vladium.ru/env/bin\"
 ExecStart=/var/www/vladium.ru/env/bin/gunicorn -w 5 -k uvicorn.workers.UvicornWorker server:app
 
 [Install]
 WantedBy=multi-user.target
-' >> /etc/systemd/system/vladium.ru.service
+" >> /etc/systemd/system/vladium.ru.service
 nginx -s reload
 systemctl enable vladium.ru
 systemctl start vladium.ru
