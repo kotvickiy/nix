@@ -73,11 +73,8 @@ ln -s /etc/nginx/sites-available/test.vladium.ru.conf /etc/nginx/sites-enabled/t
 systemctl start nginx
 
 
-
-mkdir /home/vladium/.www
-cd /home/vladium/.www/
 git clone https://github.com/kotvickiy/vladium.ru.git
-cd /home/vladium/.www/vladium.ru/
+cd /var/www/vladium.ru/
 apt install python3.10-venv -y
 python3 -m venv env
 . env/bin/activate
@@ -101,9 +98,9 @@ After=network.target
 [Service]
 User=vladium
 Group=www-data
-WorkingDirectory=/home/vladium/.www/vladium.ru
-Environment="'PATH=/home/vladium/.www/vladium.ru/env/bin'"
-ExecStart=/home/vladium/.www/vladium.ru/env/bin/gunicorn -w 5 -k uvicorn.workers.UvicornWorker server:app
+WorkingDirectory=/var/www/vladium.ru
+Environment="'PATH=/var/www/vladium.ru/env/bin'"
+ExecStart=/var/www/vladium.ru/env/bin/gunicorn -w 5 -k uvicorn.workers.UvicornWorker server:app
 
 [Install]
 WantedBy=multi-user.target
