@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
+
 pass=241215
 newuser="vladium"
-
 echo "Первоначальная установка и настройка программ и служб linux"
 
 if [ -z "$SUDO_USER" ]; then
@@ -17,12 +17,11 @@ export DEBIAN_FRONTEND
 
 apt update -yq && apt upgrade -yq
 apt autoremove -y
-
-
 apt install language-pack-ru -y
 echo "ru_RU.UTF-8 UTF-8" | tee -a /etc/locale.gen
 dpkg-reconfigure --frontend noninteractive locales
 update-locale LANG=ru_RU.UTF-8
+
 
 
 apt install samba -y
@@ -51,6 +50,7 @@ obey pam restrictions = yes
 service smbd restart
 ufw allow samba
 (echo "$pass"; echo "$pass") | smbpasswd -s -a "$newuser"
+
 
 
 apt install nginx -y
@@ -111,11 +111,13 @@ systemctl enable vladium.ru
 systemctl start vladium.ru
 
 
+
 sudo snap install core; sudo snap refresh core
 sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 certbot --nginx --domains test.vladium.ru --domains vladium.ru --non-interactive --agree-tos -m kotvickiy@inbox.ru
 sudo certbot renew --dry-run
+
 
 
 echo IPv4dev=$2 >> /home/$newuser/nix/options.conf
@@ -126,6 +128,7 @@ echo "$1" | pivpn add
 pivpn list
 echo 1 | pivpn -qr
 mv /home/vladium/configs/ /home/vladium/.configs/
+
 
 
 rm -r /home/$newuser/nix
