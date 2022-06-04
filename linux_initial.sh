@@ -111,7 +111,7 @@ systemctl start vladium.ru
 sudo snap install core; sudo snap refresh core
 sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
-certbot --nginx --non-interactive --agree-tos -m webmaster@example.com
+certbot --nginx --domains test.vladium.ru vladium.ru --non-interactive --agree-tos -m kotvickiy@inbox.ru
 sudo certbot renew --dry-run
 
 
