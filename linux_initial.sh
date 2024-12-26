@@ -76,7 +76,7 @@ ln -s /etc/nginx/sites-available/test.vladium.ru.conf /etc/nginx/sites-enabled/t
 
 git clone https://github.com/kotvickiy/vladium.ru.git
 cd /var/www/vladium.ru/
-apt install python3.10-venv -y
+apt install python3.12-venv -y
 python3 -m venv env
 . env/bin/activate
 pip install -r requirements.txt
